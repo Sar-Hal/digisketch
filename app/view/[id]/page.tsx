@@ -1,9 +1,10 @@
 import { redirect } from "next/navigation";
 
 type ViewAliasProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
-export default function ViewAlias({ params }: ViewAliasProps) {
-  redirect(`/v/${params.id}`);
+export default async function ViewAlias({ params }: ViewAliasProps) {
+  const { id } = await params;
+  redirect(`/v/${id}`);
 }

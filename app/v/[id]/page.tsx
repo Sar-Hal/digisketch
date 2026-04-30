@@ -7,15 +7,16 @@ import type { Grid } from "@/lib/types";
 export const dynamic = "force-dynamic";
 
 type NotePageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function NotePage({ params }: NotePageProps) {
+  const { id } = await params;
   const supabase = getSupabaseServer();
   const { data, error } = await supabase
     .from(NOTES_TABLE)
     .select("id, sketches, message")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (error || !data) {
