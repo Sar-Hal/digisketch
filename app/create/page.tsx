@@ -95,8 +95,8 @@ export default function CreatePage() {
 
   if (shareUrl) {
     return (
-      <main className="min-h-screen px-6 py-12">
-        <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 rounded-[28px] border-2 border-black bg-white/80 p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+      <main className="min-h-screen px-5 py-12 sm:px-8">
+        <div className="mx-auto flex w-full max-w-2xl flex-col gap-6 rounded-[26px] border-2 border-black bg-white/85 p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
           <h1 className="text-4xl">Your note is sealed.</h1>
           <p className="text-lg">
             Copy the link below and send it to someone special.
@@ -123,9 +123,9 @@ export default function CreatePage() {
   }
 
   return (
-    <main className="min-h-screen px-6 py-12">
-      <div className="mx-auto grid w-full max-w-5xl gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-        <section className="rounded-[28px] border-2 border-black bg-white/80 p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+    <main className="min-h-screen px-5 py-12 sm:px-8">
+      <div className="mx-auto grid w-full max-w-4xl gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <section className="rounded-[26px] border-2 border-black bg-white/85 p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
@@ -149,6 +149,18 @@ export default function CreatePage() {
                     onChange={updateGrid}
                   />
                   <div className="flex flex-col gap-3">
+                    <div className="flex flex-wrap items-center justify-between gap-3 text-xs uppercase tracking-wide">
+                      <span>Palette</span>
+                      <span className="flex items-center gap-2 text-sm normal-case">
+                        <span
+                          className="h-4 w-4 rounded-full border-2 border-black"
+                          style={{
+                            backgroundColor: activeColor ?? "#ffffff",
+                          }}
+                        />
+                        {activeColor ? activeColor.toUpperCase() : "Eraser"}
+                      </span>
+                    </div>
                     <Palette
                       colors={PALETTE}
                       activeColor={activeColor}
@@ -157,7 +169,7 @@ export default function CreatePage() {
                     <button
                       type="button"
                       onClick={handleClear}
-                      className="w-fit rounded-full border-2 border-black bg-white px-4 py-1 text-sm shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                      className="w-fit rounded-full border-2 border-black bg-white px-4 py-1 text-xs uppercase tracking-wide shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
                     >
                       Clear sketch
                     </button>
@@ -222,7 +234,7 @@ export default function CreatePage() {
         </section>
 
         <aside className="flex flex-col gap-6">
-          <div className="rounded-[24px] border-2 border-black bg-white/80 p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <div className="rounded-[22px] border-2 border-black bg-white/85 p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
             <p className="text-2xl">Steps</p>
             <div className="mt-4 flex flex-col gap-2">
               {steps.map((item, index) => (
@@ -241,7 +253,7 @@ export default function CreatePage() {
             </div>
           </div>
 
-          <div className="rounded-[24px] border-2 border-black bg-white/80 p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <div className="rounded-[22px] border-2 border-black bg-white/85 p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
             <p className="text-2xl">Need a fresh start?</p>
             <p className="mt-2 text-base">
               You can jump back to any sketch step and adjust your drawings.

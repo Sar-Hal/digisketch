@@ -8,6 +8,7 @@ pixel sketches, add a short message, and share an anonymous link.
 - 3 sketch canvases with an 8-color pastel palette
 - 280-character message limit
 - Anonymous, shareable URL (`/v/[id]` with `/view/[id]` alias)
+- ImageTrail animation for sketch reveals
 - Supabase-backed storage using JSONB grids
 - Touch-friendly drawing on mobile
 
@@ -16,7 +17,7 @@ pixel sketches, add a short message, and share an anonymous link.
 - Next.js (App Router) + TypeScript
 - Tailwind CSS v4
 - Supabase (PostgreSQL)
-- Framer Motion + Lucide React
+- Framer Motion + GSAP + Lucide React
 
 ## Local Setup
 
