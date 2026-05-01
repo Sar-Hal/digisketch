@@ -25,7 +25,7 @@ export default function Palette({
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <div className="flex w-full overflow-x-auto flex-nowrap items-center gap-2 pb-2 snap-x">
       {swatches.map((color, index) => {
         const isActive = color === activeColor;
         const isDark = color ? isDarkColor(color) : false;

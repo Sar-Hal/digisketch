@@ -55,7 +55,7 @@ export default function Canvas({ grid, activeColor, onChange }: CanvasProps) {
   return (
     <div className="flex flex-col items-center gap-3">
       <div
-        className="grid w-full max-w-[360px] select-none grid-cols-[repeat(16,minmax(0,1fr))] grid-rows-[repeat(16,minmax(0,1fr))] gap-[1px] rounded-[12px] border-2 border-black bg-gridline p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] touch-none"
+        className="grid w-full aspect-square select-none grid-cols-16 grid-rows-16 gap-px rounded-[12px] border-2 border-black bg-gridline p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] touch-none"
         onPointerDown={() => setIsDrawing(true)}
         onPointerUp={() => setIsDrawing(false)}
         onTouchStart={(event) => {

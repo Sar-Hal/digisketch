@@ -37,6 +37,11 @@ body {
   font-family: var(--font-vt323), "Courier New", monospace;
 }
 
+.message-text {
+  font-family: var(--font-vt323), "Courier New", monospace;
+  letter-spacing: 0.05em;
+}
+
 .pixel-reveal {
   animation: pixel-pop 0.28s ease forwards;
   opacity: 0;

@@ -20,7 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${vt323.variable} h-full antialiased`}>
-      <body className="min-h-full bg-paper text-ink">{children}</body>
+      <body className="bg-[#FDFBF7] text-ink">
+        <main className="max-w-[420px] mx-auto w-full min-h-screen px-4 py-10">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
