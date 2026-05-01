@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className="w-full">
       <div className="flex w-full flex-col gap-8">
-        <header className="relative overflow-hidden rounded-[30px] border-2 border-black bg-white/80 p-6 text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:p-8">
+        <header className="relative overflow-hidden rounded-[30px] border-2 border-black bg-white p-8 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
           <div className="absolute -top-16 -right-12 h-36 w-36 rounded-full bg-accent/40 blur-3xl" />
           <div className="absolute -bottom-20 -left-16 h-44 w-44 rounded-full bg-accent-2/40 blur-3xl" />
           <div className="relative flex flex-col items-center gap-7">
@@ -41,7 +41,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="mx-auto w-full max-w-[240px] rounded-[24px] border-2 border-black bg-white/90 p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+            <div className="m-4 mx-auto w-full max-w-[240px] rounded-[24px] border-2 border-black bg-white p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
               <p className="text-xs uppercase tracking-wide">Mini preview</p>
               <div className="mt-4 flex flex-col gap-2">
                 {[
@@ -82,7 +82,7 @@ export default function Home() {
           ].map((item) => (
             <div
               key={item.title}
-              className="flex flex-col items-center gap-3 rounded-[22px] border-2 border-black bg-white/90 p-5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+              className="flex flex-col items-center gap-3 rounded-[22px] border-2 border-black bg-white p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
             >
               <Brush size={18} />
               <h2 className="text-xl font-bold">{item.title}</h2>
@@ -91,7 +91,7 @@ export default function Home() {
           ))}
         </section>
 
-        <section className="flex flex-col items-center gap-5 rounded-[26px] border-2 border-black bg-white/80 px-6 py-7 text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <section className="flex flex-col items-center gap-5 rounded-[26px] border-2 border-black bg-white p-8 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
           <p className="text-2xl">Ready to send something tiny?</p>
           <Link
             href="/create"

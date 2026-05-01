@@ -34,7 +34,7 @@ export default async function NotePage({ params }: NotePageProps) {
   return (
     <main className="w-full">
       <div className="flex w-full flex-col gap-6">
-        <header className="rounded-[26px] border-2 border-black bg-white/85 p-5 text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <header className="rounded-[26px] border-2 border-black bg-white p-8 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
           <p className="text-sm uppercase tracking-wide">DigiSketch</p>
           <h1 className="mt-2 text-4xl">
             A tiny note just landed in your inbox.
@@ -46,7 +46,7 @@ export default async function NotePage({ params }: NotePageProps) {
 
         <EnvelopeReveal items={items} message={message} />
 
-        <div className="rounded-[24px] border-2 border-black bg-white/85 p-5 text-center shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+        <div className="rounded-[24px] border-2 border-black bg-white p-8 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
           <p className="text-xl font-bold">Make your own pixel note</p>
           <p className="mt-2 text-base message-text">
             Draw three tiny sketches and send a secret message back.

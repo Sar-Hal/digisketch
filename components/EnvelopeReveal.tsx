@@ -15,8 +15,9 @@ export default function EnvelopeReveal({ items, message }: Props) {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="flex flex-col gap-4"
     >
-      <div className="rounded-[26px] border-2 border-black bg-white/85 p-5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-        <div className="grid grid-cols-2 gap-3 mx-auto w-fit">
+      <div className="overflow-hidden rounded-[26px] border-2 border-black bg-white p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+        <div className="p-4 mx-auto w-fit">
+          <div className="grid grid-cols-2 gap-3">
           {items.map((src, i) => (
             <div
               key={i}
@@ -34,7 +35,8 @@ export default function EnvelopeReveal({ items, message }: Props) {
           ))}
         </div>
       </div>
-      <div className="rounded-[24px] border-2 border-black bg-white/85 p-5 text-center text-lg message-text shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+      </div>
+      <div className="rounded-[24px] border-2 border-black bg-white p-8 text-center text-lg message-text shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
         {message || "No message attached, just pixels."}
       </div>
     </motion.div>

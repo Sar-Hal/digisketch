@@ -97,7 +97,7 @@ export default function CreatePage() {
     return (
       <main className="w-full">
         <div className="flex w-full flex-col gap-5">
-          <div className="rounded-[26px] border-2 border-black bg-white/85 p-6 text-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <div className="rounded-[26px] border-2 border-black bg-white p-8 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
             <h1 className="text-4xl">Your note is sealed.</h1>
             <p className="mt-2 text-lg message-text">
               Copy the link below and send it to someone special.
@@ -129,7 +129,7 @@ export default function CreatePage() {
   return (
     <main className="min-h-screen py-10">
       <div className="mx-auto flex w-full max-w-md flex-col gap-5 px-4">
-        <section className="rounded-[26px] border-2 border-black bg-white/85 p-5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:p-6">
+        <section className="rounded-[26px] border-2 border-black bg-white p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
@@ -149,11 +149,13 @@ export default function CreatePage() {
 
               {step < 3 ? (
                 <div className="flex flex-col gap-4">
-                  <Canvas
-                    grid={sketches[step]}
-                    activeColor={activeColor}
-                    onChange={updateGrid}
-                  />
+                  <div className="p-2 sm:p-4">
+                    <Canvas
+                      grid={sketches[step]}
+                      activeColor={activeColor}
+                      onChange={updateGrid}
+                    />
+                  </div>
                   <div className="flex flex-col items-center gap-2">
                     <div className="flex items-center gap-2 text-xs uppercase tracking-wide">
                       <span>Palette:</span>
@@ -164,7 +166,7 @@ export default function CreatePage() {
                         }}
                       />
                     </div>
-                    <div className="flex w-full justify-center">
+                    <div className="flex w-full justify-center py-4">
                       <Palette
                         colors={PALETTE}
                         activeColor={activeColor}
@@ -188,7 +190,7 @@ export default function CreatePage() {
                     maxLength={MAX_MESSAGE_LENGTH}
                     rows={5}
                     placeholder="Type your message here..."
-                    className="w-full resize-none rounded-[12px] border-2 border-black bg-white px-3 py-2 text-sm message-text shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                    className="w-full resize-none rounded-[12px] border-2 border-black bg-white p-4 text-sm message-text shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                   />
                   <div className="flex items-center justify-between text-xs">
                     <span>Max {MAX_MESSAGE_LENGTH} characters</span>
@@ -205,7 +207,7 @@ export default function CreatePage() {
             </p>
           ) : null}
 
-          <div className="flex flex-col items-center gap-4">
+          <div className="mt-6 flex flex-col items-center gap-6">
             <div className="flex flex-wrap justify-center gap-2">
               {steps.map((item, index) => {
                 const isActive = index === step;
@@ -258,7 +260,7 @@ export default function CreatePage() {
           </div>
         </section>
 
-        <div className="rounded-[22px] border-2 border-black bg-white/85 p-5 text-center shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+        <div className="rounded-[22px] border-2 border-black bg-white p-6 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
           <p className="text-2xl">Need a fresh start?</p>
           <p className="mt-2 text-base">
             You can jump back to any sketch step and adjust your drawings.
