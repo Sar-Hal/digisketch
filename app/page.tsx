@@ -4,8 +4,8 @@ import { ArrowRight, Brush, Sparkles } from "lucide-react";
 export default function Home() {
   return (
     <main className="w-full">
-      <div className="flex w-full flex-col gap-8">
-        <header className="relative overflow-hidden rounded-[30px] border-2 border-black bg-white p-8 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+      <div className="flex w-full flex-col space-y-10">
+        <header className="relative mb-20 overflow-hidden rounded-[30px] border-2 border-black bg-white p-10 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
           <div className="absolute -top-16 -right-12 h-36 w-36 rounded-full bg-accent/40 blur-3xl" />
           <div className="absolute -bottom-20 -left-16 h-44 w-44 rounded-full bg-accent-2/40 blur-3xl" />
           <div className="relative flex flex-col items-center gap-7">
@@ -15,7 +15,7 @@ export default function Home() {
                 Tiny pixel notes, big feelings
               </span>
               <div className="flex flex-col items-center gap-3">
-                <h1 className="max-w-sm text-4xl leading-tight sm:text-5xl">
+                <h1 className="mx-auto max-w-[300px] text-4xl leading-tight sm:text-5xl">
                   DigiSketch is a pocket-sized canvas for anonymous notes.
                 </h1>
                 <p className="max-w-sm text-base sm:text-lg">
@@ -27,14 +27,14 @@ export default function Home() {
               <div className="flex flex-col items-center gap-3 sm:flex-row">
                 <Link
                   href="/create"
-                  className="inline-flex items-center justify-center gap-3 rounded-full border-2 border-black bg-accent px-6 py-3 text-lg shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center gap-3 rounded-full border-2 border-black bg-accent px-8 py-3 text-lg shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-0.5"
                 >
                   Create a Note
                   <ArrowRight size={18} />
                 </Link>
                 <a
                   href="#how"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-black bg-white px-6 py-3 text-lg shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-black bg-white px-8 py-3 text-lg shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
                 >
                   See how it works
                 </a>
@@ -82,7 +82,7 @@ export default function Home() {
           ].map((item) => (
             <div
               key={item.title}
-              className="flex flex-col items-center gap-3 rounded-[22px] border-2 border-black bg-white p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+              className="flex flex-col items-center gap-3 rounded-[22px] border-2 border-black bg-white p-10 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
             >
               <Brush size={18} />
               <h2 className="text-xl font-bold">{item.title}</h2>
@@ -91,11 +91,11 @@ export default function Home() {
           ))}
         </section>
 
-        <section className="flex flex-col items-center gap-5 rounded-[26px] border-2 border-black bg-white p-8 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+        <section className="flex flex-col items-center gap-5 rounded-[26px] border-2 border-black bg-white p-10 pb-12 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
           <p className="text-2xl">Ready to send something tiny?</p>
           <Link
             href="/create"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-black bg-accent-3 px-6 py-3 text-lg shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-black bg-accent-3 px-8 py-3 text-lg shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
           >
             Start sketching
             <ArrowRight size={18} />
