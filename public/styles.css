@@ -256,6 +256,27 @@ textarea:focus {
   transform: scale(1.1);
 }
 
+.brush-size {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+  color: #a1a1aa;
+  transition: all 0.2s;
+}
+.brush-size:hover { transform: scale(1.1); }
+.brush-size.active {
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #18181b;
+  color: #18181b;
+  transform: scale(1.1);
+}
+
 .progress-bar {
   display: flex;
   gap: 4px;

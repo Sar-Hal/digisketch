@@ -9,6 +9,8 @@ const STEPS = [
 let currentStep = 0;
 let activeColor = PALETTE[0];
 let isDrawing = false;
+let brushSize = 1;
+let domGrid = [];
 let sketches = [
   Array(32).fill(null).map(() => Array(32).fill(null)),
   Array(32).fill(null).map(() => Array(32).fill(null)),
@@ -26,6 +28,8 @@ function initCanvas() {
   const grid = document.createElement("div");
   grid.className = "canvas-grid";
   
+  domGrid = Array(32).fill(null).map(() => Array(32).fill(null));
+  
   // Create 32x32 grid
   for (let r = 0; r < 32; r++) {
     for (let c = 0; c < 32; c++) {
@@ -37,13 +41,15 @@ function initCanvas() {
       const color = sketches[currentStep][r][c];
       if (color) cell.style.backgroundColor = color;
       
+      domGrid[r][c] = cell;
+      
       cell.addEventListener("pointerdown", (e) => {
         e.preventDefault();
         isDrawing = true;
-        paint(cell, r, c);
+        paint(r, c);
       });
       cell.addEventListener("pointerenter", () => {
-        if (isDrawing) paint(cell, r, c);
+        if (isDrawing) paint(r, c);
       });
       grid.appendChild(cell);
     }
@@ -56,16 +62,24 @@ function initCanvas() {
     const touch = e.touches[0];
     const target = document.elementFromPoint(touch.clientX, touch.clientY);
     if (target && target.classList.contains("canvas-cell")) {
-      paint(target, parseInt(target.dataset.r), parseInt(target.dataset.c));
+      paint(parseInt(target.dataset.r), parseInt(target.dataset.c));
     }
   }, { passive: false });
 
   canvasContainer.appendChild(grid);
 }
 
-function paint(cell, r, c) {
-  cell.style.backgroundColor = activeColor || "white";
-  sketches[currentStep][r][c] = activeColor;
+function paint(r, c) {
+  for (let dr = 0; dr < brushSize; dr++) {
+    for (let dc = 0; dc < brushSize; dc++) {
+      const nr = r + dr;
+      const nc = c + dc;
+      if (nr < 32 && nc < 32) {
+        sketches[currentStep][nr][nc] = activeColor;
+        domGrid[nr][nc].style.backgroundColor = activeColor || "white";
+      }
+    }
+  }
 }
 
 window.addEventListener("pointerup", () => isDrawing = false);
@@ -168,6 +182,17 @@ document.getElementById("back-btn").addEventListener("click", () => {
 document.getElementById("clear-btn").addEventListener("click", () => {
   sketches[currentStep] = Array(32).fill(null).map(() => Array(32).fill(null));
   initCanvas();
+});
+
+document.getElementById("brush-1").addEventListener("click", () => {
+  brushSize = 1;
+  document.getElementById("brush-1").classList.add("active");
+  document.getElementById("brush-2").classList.remove("active");
+});
+document.getElementById("brush-2").addEventListener("click", () => {
+  brushSize = 2;
+  document.getElementById("brush-2").classList.add("active");
+  document.getElementById("brush-1").classList.remove("active");
 });
 
 const msgInput = document.getElementById("message-input");

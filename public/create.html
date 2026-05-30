@@ -33,9 +33,20 @@
             <p class="text-center mt-4" style="font-size: 13px; color: #71717a; font-weight: 500;">Drag to draw. Tap to paint. Tiny grids only.</p>
           </div>
           
-          <div class="flex flex-col items-center gap-4">
+          <div class="flex flex-col items-center gap-4 w-full">
             <div id="palette-container" class="flex flex-wrap justify-center gap-3 mx-auto" style="max-width: 260px;"></div>
-            <button id="clear-btn" class="btn" style="background: none; padding: 0; font-size: 0.875rem; font-weight: 500; color: #a1a1aa; box-shadow: none; text-decoration: underline; text-underline-offset: 4px; margin-top: 0.5rem;">Clear Canvas</button>
+            
+            <div class="flex items-center justify-between w-full mx-auto" style="max-width: 260px; padding: 0 0.5rem;">
+              <div class="flex gap-3">
+                <button id="brush-1" class="brush-size active" aria-label="1x1 Brush">
+                  <div style="width: 6px; height: 6px; background: currentColor; border-radius: 1px;"></div>
+                </button>
+                <button id="brush-2" class="brush-size" aria-label="2x2 Brush">
+                  <div style="width: 14px; height: 14px; background: currentColor; border-radius: 2px;"></div>
+                </button>
+              </div>
+              <button id="clear-btn" class="btn" style="background: none; padding: 0; font-size: 0.875rem; font-weight: 500; color: #a1a1aa; box-shadow: none; text-decoration: underline; text-underline-offset: 4px; margin: 0; width: auto;">Clear Canvas</button>
+            </div>
           </div>
         </div>
 
