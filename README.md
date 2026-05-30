@@ -1,15 +1,17 @@
 # DigiSketch
 
-DigiSketch is a minimalist PixelPost-style note app. Draw three tiny 16x16
+DigiSketch is a minimalist PixelPost-style note app. Draw three tiny 32x32
 pixel sketches, add a short message, and share an anonymous link.
 
 ## Features
 
-- 3 sketch canvases with an 8-color pastel palette
+- 3 high-resolution (32x32) sketch canvases
+- 8-color pastel palette + Custom Native Color Picker
+- Variable brush sizes (1x1, 2x2, 3x3) for faster drawing
 - 280-character message limit
 - Anonymous, shareable URL (`/v/[id]`)
 - Upstash Redis (KV) storage — always-on, lightning fast
-- Touch-friendly drawing on mobile
+- Touch-friendly drawing and painting on mobile
 - Pure vanilla frontend for zero-lag instant loading
 
 ## Tech Stack
