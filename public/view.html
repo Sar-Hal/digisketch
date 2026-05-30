@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigiSketch Note</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .reveal-animation {
+      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <main class="container flex flex-col gap-6 items-center" style="padding-bottom: 4rem;">
+    
+    <header class="glass-card w-full flex flex-col items-center gap-2 text-center" style="padding: 2.5rem 1.5rem;">
+      <span class="badge" style="background: rgba(242, 167, 179, 0.1); color: var(--color-accent); font-size: 0.6875rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; border: none; box-shadow: none;">
+        DigiSketch
+      </span>
+      <h1 class="text-3xl font-bold mt-2 sm:text-4xl">A tiny note landed in your inbox.</h1>
+      <p class="text-base text-zinc-500 sm:text-lg">Someone drew some pixels for you.</p>
+    </header>
+
+    <div id="loading" class="text-zinc-400 py-10">Unsealing envelope...</div>
+    <div id="error" class="text-red-500 py-10" style="display: none;"></div>
+
+    <div id="envelope-reveal" class="w-full flex-col gap-6 reveal-animation" style="display: none;">
+      
+      <!-- Sketches -->
+      <div class="glass-card w-full" style="padding: 1.5rem; background: rgba(255,255,255,0.85);">
+        <div id="sketches-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <!-- JS injects grids here -->
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div class="solid-card text-center" style="padding: 2rem;">
+        <p id="message-display" class="message-text" style="color: #3f3f46;"></p>
+      </div>
+
+    </div>
+
+    <div class="glass-card w-full flex flex-col items-center gap-3 text-center mt-2" style="padding: 2.5rem 1.5rem;">
+      <h2 class="text-xl font-bold">Make your own pixel note</h2>
+      <p class="text-sm text-zinc-500 max-w-xs" style="line-height: 1.6;">Draw three tiny sketches and send a secret message back.</p>
+      <a href="/create" class="btn btn-primary mt-4">Create yours</a>
+    </div>
+
+  </main>
+
+  <script src="/view.js"></script>
+</body>
+</html>

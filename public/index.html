@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigiSketch</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="container flex flex-col gap-8 items-center">
+    
+    <!-- Hero -->
+    <header class="glass-card w-full flex flex-col items-center gap-6 text-center">
+      <span class="badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-accent)"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+        Tiny pixel notes, big feelings
+      </span>
+      
+      <div class="flex flex-col items-center gap-4">
+        <h1>A pocket-sized canvas for anonymous notes.</h1>
+        <p style="max-width: 320px;">Draw three mini sketches, add a short message, and send a single, shareable link. No logins, no feeds.</p>
+      </div>
+
+      <div class="flex flex-col gap-3 w-full" style="max-width: 280px;">
+        <a href="/create" class="btn btn-primary w-full">
+          Create a Note
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="#how" class="btn btn-secondary w-full">See how it works</a>
+      </div>
+    </header>
+
+    <!-- How it works -->
+    <section id="how" class="glass-card w-full">
+      <h2 class="text-center" style="margin-bottom: 2rem;">How it works</h2>
+      
+      <div class="timeline">
+        <div class="timeline-line"></div>
+        
+        <div class="timeline-item">
+          <div class="timeline-icon" style="background: rgba(242, 167, 179, 0.1);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-accent)"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+          </div>
+          <div>
+            <h3>Sketch three moments</h3>
+            <p style="font-size: 0.875rem;">Each grid is only 16×16 pixels. Keep it sweet, simple, and tiny.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon" style="background: rgba(242, 196, 109, 0.1);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-accent-2)"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+          </div>
+          <div>
+            <h3>Add a short note</h3>
+            <p style="font-size: 0.875rem;">Write up to 280 characters. Say just enough, leave the rest to imagination.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon" style="background: rgba(140, 207, 154, 0.1);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-accent-3)"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/></svg>
+          </div>
+          <div>
+            <h3>Share the link</h3>
+            <p style="font-size: 0.875rem;">We generate one anonymous URL so you can send it anywhere.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="glass-card w-full text-center flex flex-col items-center gap-4">
+      <p style="font-size: 1.125rem; font-weight: 600;">Ready to send something tiny?</p>
+      <a href="/create" class="btn btn-primary" style="width: auto;">
+        Start sketching
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </section>
+  </main>
+</body>
+</html>
