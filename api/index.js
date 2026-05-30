@@ -7,15 +7,21 @@ import { customAlphabet } from "nanoid";
 dotenv.config({ path: ".env.local" });
 
 const app = express();
-app.use(cors());
+const ALLOWED_ORIGINS = [
+  "https://digisketch-kappa.vercel.app",
+  "http://localhost:3000",
+];
+app.use(cors({ origin: ALLOWED_ORIGINS }));
 app.use(express.json({ limit: "500kb" }));
+
+const HEX_COLOR_RE = /^#([0-9a-fA-F]{3,8})$/;
 
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_KV_REST_API_URL || "",
   token: process.env.UPSTASH_REDIS_REST_KV_REST_API_TOKEN || "",
 });
 
-const nanoid = customAlphabet("123456789abcdefghijkmnopqrstuvwxyz", 6);
+const nanoid = customAlphabet("123456789abcdefghijkmnopqrstuvwxyz", 12);
 
 app.post("/api/notes", async (req, res) => {
   try {
@@ -44,8 +50,8 @@ app.post("/api/notes", async (req, res) => {
           if (cell !== null && typeof cell !== "string") {
             return res.status(400).json({ error: "Invalid cell data type" });
           }
-          if (typeof cell === "string" && cell.length > 25) {
-             return res.status(400).json({ error: "Cell color string too long" });
+          if (typeof cell === "string" && !HEX_COLOR_RE.test(cell)) {
+             return res.status(400).json({ error: "Invalid color format" });
           }
         }
       }
@@ -69,6 +75,9 @@ app.post("/api/notes", async (req, res) => {
 app.get("/api/notes/:id", async (req, res) => {
   try {
     const id = req.params.id;
+    if (!/^[123456789abcdefghijkmnopqrstuvwxyz]+$/.test(id) || id.length > 20) {
+      return res.status(400).json({ error: "Invalid note ID" });
+    }
     const note = await redis.get(id);
 
     if (!note) {

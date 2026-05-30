@@ -37,7 +37,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         for (let c = 0; c < 32; c++) {
           const cell = document.createElement("div");
           cell.className = "mini-cell";
-          const color = grid[r] && grid[r][c];
+          const raw = grid[r] && grid[r][c];
+          const color = (typeof raw === "string" && /^#[0-9a-fA-F]{3,8}$/.test(raw)) ? raw : null;
           cell.style.backgroundColor = color || "#ffffff";
           miniGrid.appendChild(cell);
         }
