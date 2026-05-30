@@ -18,6 +18,9 @@ pixel sketches, add a short message, and share an anonymous link.
 - **Backend:** Node.js with Express
 - **Database:** Upstash Redis
 
+
+> **WIP**: This is a hobby project! Please don't share any highly sensitive or private information.
+
 ## Project Structure & Workflow
 
 Since this project uses no frontend frameworks (like React) or build tools (like Webpack), the workflow is incredibly simple:

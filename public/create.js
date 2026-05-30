@@ -10,9 +10,9 @@ let currentStep = 0;
 let activeColor = PALETTE[0];
 let isDrawing = false;
 let sketches = [
-  Array(16).fill(null).map(() => Array(16).fill(null)),
-  Array(16).fill(null).map(() => Array(16).fill(null)),
-  Array(16).fill(null).map(() => Array(16).fill(null))
+  Array(32).fill(null).map(() => Array(32).fill(null)),
+  Array(32).fill(null).map(() => Array(32).fill(null)),
+  Array(32).fill(null).map(() => Array(32).fill(null))
 ];
 
 // DOM Elements
@@ -26,9 +26,9 @@ function initCanvas() {
   const grid = document.createElement("div");
   grid.className = "canvas-grid";
   
-  // Create 16x16 grid
-  for (let r = 0; r < 16; r++) {
-    for (let c = 0; c < 16; c++) {
+  // Create 32x32 grid
+  for (let r = 0; r < 32; r++) {
+    for (let c = 0; c < 32; c++) {
       const cell = document.createElement("button");
       cell.className = "canvas-cell";
       cell.dataset.r = r;
@@ -166,7 +166,7 @@ document.getElementById("back-btn").addEventListener("click", () => {
 });
 
 document.getElementById("clear-btn").addEventListener("click", () => {
-  sketches[currentStep] = Array(16).fill(null).map(() => Array(16).fill(null));
+  sketches[currentStep] = Array(32).fill(null).map(() => Array(32).fill(null));
   initCanvas();
 });
 

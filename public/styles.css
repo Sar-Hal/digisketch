@@ -200,9 +200,9 @@ p { font-size: 1rem; color: #71717a; line-height: 1.5; }
 /* Forms & Canvas */
 .canvas-grid {
   display: grid;
-  grid-template-columns: repeat(16, 1fr);
-  grid-template-rows: repeat(16, 1fr);
-  gap: 1px;
+  grid-template-columns: repeat(32, 1fr);
+  grid-template-rows: repeat(32, 1fr);
+  gap: 0px;
   background-color: #e4e4e7;
   padding: 8px;
   border-radius: 16px;
@@ -275,9 +275,9 @@ textarea:focus {
 /* Mini pixel renderer */
 .mini-grid {
   display: grid;
-  grid-template-columns: repeat(16, 1fr);
-  grid-template-rows: repeat(16, 1fr);
-  gap: 1px;
+  grid-template-columns: repeat(32, 1fr);
+  grid-template-rows: repeat(32, 1fr);
+  gap: 0px;
   background-color: #f4f4f5;
   padding: 4px;
   border-radius: 12px;

@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       const miniGrid = document.createElement("div");
       miniGrid.className = "mini-grid";
       
-      for (let r = 0; r < 16; r++) {
-        for (let c = 0; c < 16; c++) {
+      for (let r = 0; r < 32; r++) {
+        for (let c = 0; c < 32; c++) {
           const cell = document.createElement("div");
           cell.className = "mini-cell";
           const color = grid[r] && grid[r][c];
