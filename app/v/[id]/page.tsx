@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import EnvelopeReveal from "@/components/EnvelopeReveal";
-import { getSupabaseServer, NOTES_TABLE } from "@/lib/supabase-server";
+import { getNote } from "@/lib/kv";
 import type { Grid } from "@/lib/types";
 import { createEmptyGrid } from "@/lib/utils";
-
-export const dynamic = "force-dynamic";
 
 type NotePageProps = {
   params: Promise<{ id: string }>;
@@ -13,14 +11,9 @@ type NotePageProps = {
 
 export default async function NotePage({ params }: NotePageProps) {
   const { id } = await params;
-  const supabase = getSupabaseServer();
-  const { data, error } = await supabase
-    .from(NOTES_TABLE)
-    .select("id, sketches, message")
-    .eq("id", id)
-    .single();
+  const data = await getNote(id);
 
-  if (error || !data) {
+  if (!data) {
     notFound();
   }
 

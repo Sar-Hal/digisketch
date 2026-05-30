@@ -9,14 +9,14 @@ pixel sketches, add a short message, and share an anonymous link.
 - 280-character message limit
 - Anonymous, shareable URL (`/v/[id]` with `/view/[id]` alias)
 - ImageTrail animation for sketch reveals
-- Supabase-backed storage using JSONB grids
+- Upstash Redis (KV) storage — always-on, no auto-pause
 - Touch-friendly drawing on mobile
 
 ## Tech Stack
 
 - Next.js (App Router) + TypeScript
 - Tailwind CSS v4
-- Supabase (PostgreSQL)
+- Upstash Redis (via Vercel Marketplace)
 - Framer Motion + GSAP + Lucide React
 
 ## Local Setup
@@ -27,24 +27,13 @@ pixel sketches, add a short message, and share an anonymous link.
 npm install
 ```
 
-2. Create the Supabase table:
-
-```sql
-create table public.sketches (
-	id text primary key,
-	sketches jsonb not null,
-	message text,
-	theme text default 'light',
-	created_at timestamptz default now()
-);
-```
+2. Create a Redis database on the [Vercel Marketplace](https://vercel.com/marketplace) (Upstash) and link it to your project — or create one directly at [console.upstash.com](https://console.upstash.com).
 
 3. Add a `.env.local` file:
 
 ```
-SUPABASE_URL=your-project-url
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
-SUPABASE_TABLE_NAME=sketches
+UPSTASH_REDIS_REST_URL=your-redis-rest-url
+UPSTASH_REDIS_REST_TOKEN=your-redis-rest-token
 ```
 
 4. Run the dev server:
@@ -76,4 +65,4 @@ Returns:
 ## Notes
 
 - A basic in-memory rate limiter is applied in the API route.
-- The Supabase service role key is only used server-side.
+- Redis credentials are only used server-side.

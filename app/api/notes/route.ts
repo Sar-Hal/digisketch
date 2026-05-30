@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseServer, NOTES_TABLE } from "@/lib/supabase-server";
+import { saveNote } from "@/lib/kv";
 import { generateId, isValidGrid } from "@/lib/utils";
 import { MAX_MESSAGE_LENGTH } from "@/lib/constants";
 import type { Grid } from "@/lib/types";
@@ -66,25 +66,17 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const supabase = getSupabaseServer();
   let id = generateId();
 
   for (let attempt = 0; attempt < 3; attempt += 1) {
-    const { error } = await supabase
-      .from(NOTES_TABLE)
-      .insert({ id, sketches, message, theme });
+    const saved = await saveNote(id, { sketches, message, theme });
 
-    if (!error) {
+    if (saved) {
       return NextResponse.json({ id });
     }
 
-    if (error.code !== "23505") {
-      return NextResponse.json(
-        { error: "Unable to save your note." },
-        { status: 500 }
-      );
-    }
-
+    // saveNote returns false only when the key already exists (NX collision).
+    // Generate a fresh ID and retry.
     id = generateId();
   }
 
@@ -93,3 +85,4 @@ export async function POST(req: NextRequest) {
     { status: 500 }
   );
 }
+
