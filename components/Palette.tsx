@@ -25,7 +25,7 @@ export default function Palette({
   };
 
   return (
-    <div className="flex w-full overflow-x-auto flex-nowrap items-center gap-2 pb-2 snap-x">
+    <div className="flex flex-wrap justify-center items-center gap-3 px-1">
       {swatches.map((color, index) => {
         const isActive = color === activeColor;
         const isDark = color ? isDarkColor(color) : false;
@@ -36,12 +36,12 @@ export default function Palette({
             aria-label={color ? `Color ${index + 1}: ${color}` : "Eraser"}
             title={color ? color : "Eraser"}
             onClick={() => onSelect(color)}
-            className={`flex h-11 w-11 items-center justify-center rounded-full border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${
-              isActive ? "ring-2 ring-black ring-offset-2" : "ring-0"
-            } ${color ? (isDark ? "text-white" : "text-black") : "bg-white"}`}
+            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full shadow-sm ring-1 ring-black/5 transition-transform hover:scale-110 active:scale-95 ${
+              isActive ? "ring-2 ring-zinc-900 ring-offset-2 scale-110 shadow-md" : "ring-1 ring-black/10"
+            } ${color ? (isDark ? "text-white" : "text-black") : "bg-white text-zinc-500"}`}
             style={color ? { backgroundColor: color } : undefined}
           >
-            {color ? (isActive ? <Check size={16} /> : null) : <Eraser size={16} />}
+            {color ? (isActive ? <Check size={16} strokeWidth={3} /> : null) : <Eraser size={16} strokeWidth={2.5} />}
           </button>
         );
       })}

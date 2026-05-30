@@ -25,12 +25,12 @@ export default function CopyLink({ url }: CopyLinkProps) {
       <input
         value={url}
         readOnly
-        className="w-full rounded-xl border-2 border-black bg-white px-4 py-2 text-sm shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+        className="w-full rounded-2xl bg-zinc-50 px-4 py-3.5 text-sm text-zinc-600 shadow-inner ring-1 ring-black/5 focus:outline-none"
       />
       <button
         type="button"
         onClick={handleCopy}
-        className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-black bg-accent px-4 py-2 text-sm shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+        className="inline-flex items-center justify-center gap-2 rounded-full bg-zinc-900 px-6 py-3.5 text-sm font-medium text-white shadow-lg shadow-black/20 transition-transform hover:-translate-y-0.5 active:scale-95 sm:shrink-0"
       >
         {copied ? <Check size={16} /> : <Copy size={16} />}
         {copied ? "Copied!" : "Copy link"}

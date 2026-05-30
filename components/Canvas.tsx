@@ -53,9 +53,9 @@ export default function Canvas({ grid, activeColor, onChange }: CanvasProps) {
   };
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="flex flex-col items-center gap-4 w-full">
       <div
-        className="grid w-full aspect-square select-none grid-cols-16 grid-rows-16 gap-px rounded-[12px] border-2 border-black bg-gridline p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] touch-none"
+        className="grid w-full aspect-square select-none grid-cols-16 grid-rows-16 gap-px rounded-2xl bg-zinc-200 p-2 shadow-inner ring-1 ring-black/5 touch-none"
         onPointerDown={() => setIsDrawing(true)}
         onPointerUp={() => setIsDrawing(false)}
         onTouchStart={(event) => {
@@ -83,13 +83,13 @@ export default function Canvas({ grid, activeColor, onChange }: CanvasProps) {
                   paintCell(rowIndex, colIndex);
                 }
               }}
-              className="aspect-square w-full rounded-[2px] bg-paper"
+              className="aspect-square w-full rounded-[2px] bg-white shadow-sm transition-colors duration-75"
               style={{ backgroundColor: cell ?? undefined }}
             />
           ))
         )}
       </div>
-      <p className="text-sm">Drag to draw. Tap to paint. Tiny grids only.</p>
+      <p className="text-[13px] text-zinc-500 text-center font-medium">Drag to draw. Tap to paint. Tiny grids only.</p>
     </div>
   );
 }

@@ -1,24 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --paper: #fdfbf7;
-  --ink: #1f1b16;
-  --accent: #f2a7b3;
-  --accent-2: #f2c46d;
-  --accent-3: #8ccf9a;
-  --grid-line: rgba(31, 27, 22, 0.08);
-}
-
-@theme inline {
-  --color-paper: var(--paper);
-  --color-ink: var(--ink);
-  --color-accent: var(--accent);
-  --color-accent-2: var(--accent-2);
-  --color-accent-3: var(--accent-3);
-  --color-gridline: var(--grid-line);
+@theme {
+  --color-paper: #fafafa;
+  --color-ink: #18181b;
+  --color-accent: #f2a7b3;
+  --color-accent-2: #f2c46d;
+  --color-accent-3: #8ccf9a;
+  --color-gridline: rgba(24, 24, 27, 0.06);
   --font-display: var(--font-vt323);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 * {
@@ -26,24 +16,23 @@
 }
 
 body {
-  background-color: var(--paper);
-  background-image: radial-gradient(
-    circle at 1px 1px,
-    rgba(0, 0, 0, 0.045) 1px,
-    transparent 0
-  );
-  background-size: 18px 18px;
-  color: var(--ink);
-  font-family: var(--font-vt323), "Courier New", monospace;
+  background-color: var(--color-paper);
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(350, 75%, 85%, 0.4) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(140, 45%, 80%, 0.3) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(40, 80%, 80%, 0.3) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
 }
 
 .message-text {
-  font-family: var(--font-vt323), "Courier New", monospace;
-  letter-spacing: 0.05em;
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
 }
 
 .pixel-reveal {
-  animation: pixel-pop 0.28s ease forwards;
+  animation: pixel-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   opacity: 0;
   transform: scale(0.9);
 }
@@ -53,40 +42,4 @@ body {
     opacity: 1;
     transform: scale(1);
   }
-}
-
-.image-trail {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 10;
-  border-radius: 22px;
-  background: transparent;
-  overflow: visible;
-}
-
-.image-trail__img {
-  width: clamp(120px, 26vw, 190px);
-  aspect-ratio: 1.1;
-  border-radius: 16px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  overflow: hidden;
-  will-change: transform, filter;
-  border: 2px solid #1f1b16;
-  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 1);
-  background: #fdfbf7;
-}
-
-.image-trail__inner {
-  background-position: 50% 50%;
-  width: calc(100% + 20px);
-  height: calc(100% + 20px);
-  background-size: cover;
-  position: absolute;
-  top: calc(-1 * 20px / 2);
-  left: calc(-1 * 20px / 2);
-  image-rendering: pixelated;
 }

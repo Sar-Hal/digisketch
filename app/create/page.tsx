@@ -13,19 +13,19 @@ import type { Grid } from "@/lib/types";
 
 const steps = [
   {
-    title: "Sketch 1",
+    title: "First Sketch",
     description: "Draw a tiny memory. Keep it simple and pixel-y.",
   },
   {
-    title: "Sketch 2",
+    title: "Second Sketch",
     description: "Add a second doodle to keep the story going.",
   },
   {
-    title: "Sketch 3",
+    title: "Final Sketch",
     description: "Finish with one last tiny sketch.",
   },
   {
-    title: "Message",
+    title: "Add a Message",
     description: "Write a short note to go with your sketches.",
   },
 ];
@@ -93,88 +93,89 @@ export default function CreatePage() {
     setActiveColor(PALETTE[0]);
   };
 
-  // State Stability Lockdown: Wrap entire create flow. If shareUrl exists, ONLY render Success UI.
   if (shareUrl) {
     return (
-      <main className="min-h-screen py-10">
-        <div className="mx-auto flex w-full max-w-md flex-col gap-5 px-4">
-          <div className="rounded-[26px] border-2 border-black bg-white p-10 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4 }}
-              className="flex flex-col gap-5"
-            >
-              <h1 className="text-4xl">Your note is sealed.</h1>
-              <p className="mt-2 text-lg message-text">
-                Copy the link below and send it to someone special.
-              </p>
-              <div className="mt-4">
-                <CopyLink url={shareUrl} />
-              </div>
-              <div className="mt-6 flex flex-col items-center gap-4">
-                <a
-                  href={shareUrl}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-black bg-accent px-8 py-3 text-base shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
-                >
-                  Preview note
-                </a>
-                <button
-                  type="button"
-                  onClick={resetAll}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-black bg-[#E5E0F5] px-8 py-3 text-base shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
-                >
-                  Make another
-                </button>
-              </div>
-            </motion.div>
-          </div>
+      <div className="flex w-full flex-col gap-5">
+        <div className="rounded-[32px] bg-white/70 p-8 text-center shadow-xl shadow-black/5 ring-1 ring-black/5 backdrop-blur-md sm:p-12">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            className="flex flex-col gap-6"
+          >
+            <h1 className="text-3xl font-bold text-zinc-900 sm:text-4xl">Your note is sealed.</h1>
+            <p className="text-base text-zinc-500 sm:text-lg">
+              Copy the link below and send it to someone special.
+            </p>
+            <div className="mt-2">
+              <CopyLink url={shareUrl} />
+            </div>
+            <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <a
+                href={shareUrl}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-zinc-900 px-8 py-3.5 text-base font-medium text-white shadow-lg shadow-black/20 transition-transform hover:-translate-y-0.5 active:scale-95 sm:w-auto"
+              >
+                Preview note
+              </a>
+              <button
+                type="button"
+                onClick={resetAll}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-8 py-3.5 text-base font-medium text-zinc-700 shadow-sm ring-1 ring-black/5 transition-transform hover:-translate-y-0.5 active:scale-95 sm:w-auto"
+              >
+                Make another
+              </button>
+            </div>
+          </motion.div>
         </div>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="min-h-screen py-10">
-      <div className="mx-auto flex w-full max-w-md flex-col gap-5 px-4">
-        <section className="rounded-[26px] border-2 border-black bg-white p-14 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+    <div className="flex w-full flex-col gap-6">
+      <section className="flex flex-col overflow-hidden rounded-[32px] bg-white/70 shadow-xl shadow-black/5 ring-1 ring-black/5 backdrop-blur-md">
+        
+        {/* Progress Bar */}
+        <div className="flex w-full gap-1 p-6 pb-0 sm:p-8 sm:pb-0">
+          {steps.map((_, idx) => (
+            <div 
+              key={idx} 
+              className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${
+                idx <= step ? "bg-accent" : "bg-zinc-200"
+              }`} 
+            />
+          ))}
+        </div>
+
+        <div className="p-6 sm:p-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
               className="flex flex-col gap-8"
             >
-              <div className="flex flex-col items-center gap-3 text-center">
-                <p className="text-sm uppercase tracking-wide">
+              <div className="flex flex-col items-center gap-2 text-center">
+                <span className="text-xs font-semibold uppercase tracking-wider text-accent">
                   Step {step + 1} of {steps.length}
-                </p>
-                <h1 className="text-3xl">{currentStep.title}</h1>
-                <p className="max-w-sm text-base">{currentStep.description}</p>
+                </span>
+                <h1 className="text-2xl font-bold text-zinc-900 sm:text-3xl">{currentStep.title}</h1>
+                <p className="max-w-sm text-sm text-zinc-500 sm:text-base">{currentStep.description}</p>
               </div>
 
               {step < 3 ? (
                 <div className="flex flex-col gap-8">
-                  <div className="px-4 sm:px-6">
+                  <div className="mx-auto w-full max-w-[280px]">
                     <Canvas
                       grid={sketches[step]}
                       activeColor={activeColor}
                       onChange={updateGrid}
                     />
                   </div>
-                  <div className="flex w-full flex-col items-center gap-8">
-                    <div className="flex w-full flex-col items-center gap-4">
-                      <div className="flex items-center gap-2 text-xs uppercase tracking-wide">
-                        <span>Palette:</span>
-                        <span
-                          className="h-3 w-3 rounded-full border-2 border-black"
-                          style={{
-                            backgroundColor: activeColor ?? "#ffffff",
-                          }}
-                        />
-                      </div>
+                  <div className="flex w-full flex-col items-center gap-6">
+                    <div className="flex w-full flex-col items-center gap-3">
                       <div className="flex w-full justify-center">
                         <Palette
                           colors={PALETTE}
@@ -186,25 +187,25 @@ export default function CreatePage() {
                     <button
                       type="button"
                       onClick={handleClear}
-                      className="w-full max-w-[200px] rounded-full border-2 border-black bg-white px-8 py-3 text-xs uppercase tracking-wide shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                      className="text-sm font-medium text-zinc-400 underline-offset-4 hover:text-zinc-600 hover:underline"
                     >
                       Clear Canvas
                     </button>
                   </div>
                 </div>
               ) : (
-                <div className="m-auto mb-10 flex w-full max-w-[90%] flex-col gap-3">
+                <div className="mx-auto flex w-full max-w-[320px] flex-col gap-2">
                   <textarea
                     value={message}
                     onChange={(event) => setMessage(event.target.value)}
                     maxLength={MAX_MESSAGE_LENGTH}
                     rows={5}
                     placeholder="Type your message here..."
-                    className="message-text w-full resize-none rounded-[12px] border-2 border-black bg-white p-4 text-sm shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                    className="message-text w-full resize-none rounded-2xl bg-zinc-50 p-4 text-base text-zinc-700 shadow-inner ring-1 ring-black/5 focus:outline-none focus:ring-2 focus:ring-accent/50"
                   />
-                  <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center justify-between px-1 text-xs text-zinc-400">
                     <span>Max {MAX_MESSAGE_LENGTH} characters</span>
-                    <span className="font-bold">
+                    <span className={`font-medium ${message.length === MAX_MESSAGE_LENGTH ? 'text-red-400' : ''}`}>
                       {message.length}/{MAX_MESSAGE_LENGTH}
                     </span>
                   </div>
@@ -214,79 +215,55 @@ export default function CreatePage() {
           </AnimatePresence>
 
           {error ? (
-            <p className="mt-4 rounded-xl border-2 border-black bg-accent/40 px-3 py-2 text-sm">
+            <p className="mt-6 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600 ring-1 ring-red-100">
               {error}
             </p>
           ) : null}
 
-          <div className="mt-8 flex flex-col items-center gap-4">
-            <div className="mb-8 flex flex-wrap justify-center gap-8">
-              {steps.map((item, index) => {
-                const isActive = index === step;
-                return (
-                  <button
-                    key={item.title}
-                    type="button"
-                    onClick={() => setStep(index)}
-                    className={`rounded-full border-2 border-black px-4 py-2 text-sm font-bold uppercase tracking-wide shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${
-                      isActive ? "bg-accent" : "bg-white"
-                    }`}
-                  >
-                    {index + 1}
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="mt-16 flex w-full flex-col items-center gap-4">
-              {step < 3 ? (
-                <button
-                  type="button"
-                  onClick={() =>
-                    setStep((prev) => Math.min(steps.length - 1, prev + 1))
-                  }
-                  className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border-2 border-black bg-accent px-8 py-3 text-base shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
-                >
-                  Next
-                  <ArrowRight size={16} />
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={handleSend}
-                  disabled={isSubmitting}
-                  className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border-2 border-black bg-accent-3 px-8 py-3 text-base shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] disabled:opacity-50"
-                >
-                  <Send size={16} />
-                  {isSubmitting ? "Sending..." : "Send"}
-                </button>
-              )}
+          {/* Navigation Controls */}
+          <div className="mt-10 flex w-full flex-col gap-3 sm:flex-row-reverse sm:justify-between">
+            {step < 3 ? (
+              <button
+                type="button"
+                onClick={() => setStep((prev) => Math.min(steps.length - 1, prev + 1))}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-zinc-900 px-6 py-3.5 text-base font-medium text-white shadow-lg shadow-black/20 transition-transform hover:-translate-y-0.5 active:scale-95 sm:w-auto"
+              >
+                Next
+                <ArrowRight size={16} />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleSend}
+                disabled={isSubmitting}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 text-base font-medium text-white shadow-lg shadow-accent/20 transition-transform hover:-translate-y-0.5 disabled:opacity-50 active:scale-95 sm:w-auto"
+              >
+                <Send size={16} />
+                {isSubmitting ? "Sending..." : "Send Note"}
+              </button>
+            )}
+            
+            {step > 0 ? (
               <button
                 type="button"
                 onClick={() => setStep((prev) => Math.max(0, prev - 1))}
-                disabled={step === 0}
-                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border-2 border-black bg-white px-8 py-3 text-base shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] disabled:opacity-50"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-base font-medium text-zinc-700 shadow-sm ring-1 ring-black/5 transition-transform hover:-translate-y-0.5 active:scale-95 sm:w-auto"
               >
                 <ArrowLeft size={16} />
                 Back
               </button>
-            </div>
+            ) : (
+              <Link
+                href="/"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-base font-medium text-zinc-700 shadow-sm ring-1 ring-black/5 transition-transform hover:-translate-y-0.5 active:scale-95 sm:w-auto"
+              >
+                <ArrowLeft size={16} />
+                Home
+              </Link>
+            )}
           </div>
-        </section>
-
-        <div className="rounded-[22px] border-2 border-black bg-white px-6 pb-20 pt-6 text-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-          <p className="text-2xl">Need a fresh start?</p>
-          <p className="mt-2 text-base">
-            You can jump back to any sketch step and adjust your drawings.
-          </p>
-          <Link
-            href="/"
-            className="mt-6 inline-flex items-center gap-2 rounded-full border-2 border-black bg-[#E5E0F5] px-8 py-3 text-base shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-0.5"
-          >
-            Back to home
-          </Link>
         </div>
-      </div>
-    </main>
+      </section>
+    </div>
   );
 }
