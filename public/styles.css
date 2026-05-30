@@ -4,7 +4,7 @@
 :root {
   --color-paper: #ffecbf;
   --color-ink: #18181b;
-  --color-accent: #ecf2a7;
+  --color-accent: #f2a7b3;
   --color-accent-2: #f2c46d;
   --color-accent-3: #8ccf9a;
   --color-gridline: rgba(24, 24, 27, 0.06);
@@ -195,7 +195,6 @@ p { font-size: 1rem; color: #71717a; line-height: 1.5; }
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 0 0 4px white;
 }
 
 /* Forms & Canvas */

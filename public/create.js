@@ -108,7 +108,8 @@ function updateUI() {
   
   const nextBtn = document.getElementById("next-btn");
   nextBtn.innerText = currentStep === 3 ? "Send Note" : "Next";
-  nextBtn.className = currentStep === 3 ? "btn btn-accent" : "btn btn-primary";
+  nextBtn.className = "btn btn-primary";
+  
   
   const backBtn = document.getElementById("back-btn");
   backBtn.innerText = currentStep === 0 ? "Home" : "Back";
