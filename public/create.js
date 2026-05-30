@@ -86,26 +86,74 @@ window.addEventListener("pointerup", () => isDrawing = false);
 window.addEventListener("pointercancel", () => isDrawing = false);
 window.addEventListener("touchend", () => isDrawing = false);
 
+let customColor = null;
+
 function initPalette() {
   paletteContainer.innerHTML = '';
-  const swatches = [...PALETTE, null];
+  const swatches = [...PALETTE, 'custom', null];
   
-  swatches.forEach(color => {
-    const btn = document.createElement("button");
-    btn.className = "swatch" + (color === activeColor ? " active" : "");
-    btn.style.backgroundColor = color || "white";
-    
-    if (!color) {
-      btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71717a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>`;
-    } else {
+  swatches.forEach(item => {
+    if (item === 'custom') {
+      const wrapper = document.createElement("div");
+      
+      const btn = document.createElement("button");
+      btn.className = "swatch" + (activeColor === customColor && customColor !== null ? " active" : "");
+      if (customColor) {
+        btn.style.backgroundColor = customColor;
+      } else {
+        btn.style.background = "conic-gradient(red, yellow, lime, aqua, blue, magenta, red)";
+      }
       btn.style.boxShadow = `inset 0 0 0 1px rgba(0,0,0,0.1)`;
-    }
 
-    btn.onclick = () => {
-      activeColor = color;
-      initPalette();
-    };
-    paletteContainer.appendChild(btn);
+      const input = document.createElement("input");
+      input.type = "color";
+      input.value = customColor || "#ff0000";
+      input.style.opacity = "0";
+      input.style.position = "absolute";
+      input.style.width = "0";
+      input.style.height = "0";
+      input.style.pointerEvents = "none";
+      
+      input.oninput = (e) => {
+        customColor = e.target.value;
+        activeColor = customColor;
+        btn.style.background = customColor;
+        btn.classList.add("active");
+        Array.from(paletteContainer.querySelectorAll(".swatch")).forEach(s => {
+          if (s !== btn) s.classList.remove("active");
+        });
+      };
+
+      btn.onclick = () => {
+        if (customColor && activeColor !== customColor) {
+          activeColor = customColor;
+          initPalette();
+        } else {
+          input.click();
+        }
+      };
+
+      wrapper.appendChild(btn);
+      wrapper.appendChild(input);
+      paletteContainer.appendChild(wrapper);
+    } else {
+      const color = item;
+      const btn = document.createElement("button");
+      btn.className = "swatch" + (color === activeColor ? " active" : "");
+      btn.style.backgroundColor = color || "white";
+      
+      if (!color) {
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71717a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>`;
+      } else {
+        btn.style.boxShadow = `inset 0 0 0 1px rgba(0,0,0,0.1)`;
+      }
+
+      btn.onclick = () => {
+        activeColor = color;
+        initPalette();
+      };
+      paletteContainer.appendChild(btn);
+    }
   });
 }
 
@@ -188,11 +236,19 @@ document.getElementById("brush-1").addEventListener("click", () => {
   brushSize = 1;
   document.getElementById("brush-1").classList.add("active");
   document.getElementById("brush-2").classList.remove("active");
+  document.getElementById("brush-3").classList.remove("active");
 });
 document.getElementById("brush-2").addEventListener("click", () => {
   brushSize = 2;
   document.getElementById("brush-2").classList.add("active");
   document.getElementById("brush-1").classList.remove("active");
+  document.getElementById("brush-3").classList.remove("active");
+});
+document.getElementById("brush-3").addEventListener("click", () => {
+  brushSize = 3;
+  document.getElementById("brush-3").classList.add("active");
+  document.getElementById("brush-1").classList.remove("active");
+  document.getElementById("brush-2").classList.remove("active");
 });
 
 const msgInput = document.getElementById("message-input");
