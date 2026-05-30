@@ -8,7 +8,7 @@ dotenv.config({ path: ".env.local" });
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "500kb" }));
 
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_KV_REST_API_URL || "",
@@ -20,8 +20,35 @@ const nanoid = customAlphabet("123456789abcdefghijkmnopqrstuvwxyz", 6);
 app.post("/api/notes", async (req, res) => {
   try {
     const { sketches, message } = req.body;
-    if (!sketches || !Array.isArray(sketches)) {
-      return res.status(400).json({ error: "Invalid sketches format" });
+    
+    if (message !== undefined && typeof message !== "string") {
+      return res.status(400).json({ error: "Message must be a string" });
+    }
+    if (message && message.length > 300) {
+      return res.status(400).json({ error: "Message exceeds 300 characters" });
+    }
+
+    if (!sketches || !Array.isArray(sketches) || sketches.length !== 3) {
+      return res.status(400).json({ error: "Must provide exactly 3 sketches" });
+    }
+
+    for (const grid of sketches) {
+      if (!Array.isArray(grid) || (grid.length !== 16 && grid.length !== 32)) {
+        return res.status(400).json({ error: "Invalid grid size. Must be 16x16 or 32x32" });
+      }
+      for (const row of grid) {
+        if (!Array.isArray(row) || row.length !== grid.length) {
+          return res.status(400).json({ error: "Invalid row length" });
+        }
+        for (const cell of row) {
+          if (cell !== null && typeof cell !== "string") {
+            return res.status(400).json({ error: "Invalid cell data type" });
+          }
+          if (typeof cell === "string" && cell.length > 25) {
+             return res.status(400).json({ error: "Cell color string too long" });
+          }
+        }
+      }
     }
 
     const id = nanoid();
