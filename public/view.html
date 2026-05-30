@@ -6,13 +6,247 @@
   <title>DigiSketch Note</title>
   <link rel="stylesheet" href="/styles.css">
   <style>
+    /* ── Envelope ── */
+    .envelope-wrapper {
+      perspective: 800px;
+      width: min(340px, 85vw);
+      margin: 0 auto;
+    }
+
+    .envelope {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1.45 / 1;
+      cursor: pointer;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.10));
+    }
+
+    /* Envelope body */
+    .envelope-body {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(165deg, #fff5e6, #ffe8d6);
+      border-radius: 12px;
+      border: 2px solid rgba(31, 27, 22, 0.12);
+      overflow: hidden;
+    }
+
+    /* Inner shadow for depth */
+    .envelope-body::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      box-shadow: inset 0 -30px 40px -20px rgba(0,0,0,0.06);
+      pointer-events: none;
+    }
+
+    /* Decorative stamp */
+    .envelope-stamp {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      width: 40px;
+      height: 48px;
+      background: linear-gradient(135deg, #f2a7b3, #f2c46d);
+      border-radius: 3px;
+      border: 3px solid white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .envelope-stamp::after {
+      content: "✦";
+      font-size: 18px;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    }
+
+    /* Address lines */
+    .envelope-lines {
+      position: absolute;
+      top: 50%;
+      left: 24px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .envelope-line {
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(31, 27, 22, 0.08);
+    }
+
+    .envelope-line:nth-child(1) { width: 120px; }
+    .envelope-line:nth-child(2) { width: 90px; }
+    .envelope-line:nth-child(3) { width: 105px; }
+
+    /* Heart seal */
+    .envelope-seal {
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 32px;
+      background: #e85d75;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      box-shadow: 0 2px 8px rgba(232, 93, 117, 0.35);
+      transition: transform 0.3s ease;
+    }
+
+    .envelope-seal::after {
+      content: "♥";
+      color: white;
+      font-size: 14px;
+    }
+
+    .envelope:hover .envelope-seal {
+      transform: translateX(-50%) scale(1.15);
+    }
+
+    /* Flap (triangle) */
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 55%;
+      transform-origin: top center;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 3;
+    }
+
+    .envelope-flap svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── Opening animation ── */
+    .envelope.opening .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .envelope.opening .envelope-seal {
+      animation: sealPop 0.3s ease forwards;
+    }
+
+    @keyframes sealPop {
+      0% { transform: translateX(-50%) scale(1); opacity: 1; }
+      100% { transform: translateX(-50%) scale(0); opacity: 0; }
+    }
+
+    /* Letter sliding out */
+    .envelope-letter {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      bottom: 10%;
+      height: 70%;
+      background: white;
+      border-radius: 8px;
+      border: 1.5px solid rgba(31, 27, 22, 0.08);
+      z-index: 1;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #a1a1aa;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .envelope.opening .envelope-letter {
+      transform: translateY(-120%);
+    }
+
+    /* Tap hint */
+    .tap-hint {
+      text-align: center;
+      font-size: 0.8125rem;
+      color: #a1a1aa;
+      margin-top: 12px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* ── Fade out envelope, fade in content ── */
+    .envelope-scene {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .envelope-scene.hide {
+      opacity: 0;
+      transform: scale(0.95) translateY(-10px);
+      pointer-events: none;
+    }
+
+    /* ── Content reveal ── */
     .reveal-animation {
-      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       opacity: 0;
       transform: translateY(30px);
     }
+
+    .reveal-animation.show {
+      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
     @keyframes slideUp {
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Staggered sketch card reveals */
+    .sketch-card {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sketch-card.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Message typewriter-ish reveal */
+    .message-reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.6s ease 0.6s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+    }
+
+    .message-reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Sparkle particles */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 100;
+      font-size: 16px;
+      animation: sparkleFloat 1s ease-out forwards;
+    }
+
+    @keyframes sparkleFloat {
+      0% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+      100% { opacity: 0; transform: translate(var(--sx), var(--sy)) scale(0) rotate(360deg); }
     }
   </style>
 </head>
@@ -30,6 +264,40 @@
     <div id="loading" class="text-zinc-400 py-10">Unsealing envelope...</div>
     <div id="error" class="text-red-500 py-10" style="display: none;"></div>
 
+    <!-- Envelope Animation -->
+    <div id="envelope-scene" class="envelope-scene" style="display: none;">
+      <div class="envelope-wrapper">
+        <div id="envelope" class="envelope">
+          <!-- Body -->
+          <div class="envelope-body">
+            <div class="envelope-stamp"></div>
+            <div class="envelope-lines">
+              <div class="envelope-line"></div>
+              <div class="envelope-line"></div>
+              <div class="envelope-line"></div>
+            </div>
+          </div>
+          <!-- Letter inside -->
+          <div class="envelope-letter">Your note</div>
+          <!-- Flap -->
+          <div class="envelope-flap">
+            <svg viewBox="0 0 340 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0 L170 110 L340 0 Z" fill="url(#flapGrad)" stroke="rgba(31,27,22,0.12)" stroke-width="1.5"/>
+              <defs>
+                <linearGradient id="flapGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#ffe0c8"/>
+                  <stop offset="100%" stop-color="#ffd4b8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <!-- Seal -->
+          <div class="envelope-seal"></div>
+        </div>
+      </div>
+      <p class="tap-hint">Tap to open</p>
+    </div>
+
     <div id="envelope-reveal" class="w-full flex-col gap-6 reveal-animation" style="display: none;">
       
       <!-- Sketches -->
@@ -40,7 +308,7 @@
       </div>
 
       <!-- Message -->
-      <div class="solid-card text-center" style="padding: 2rem;">
+      <div class="solid-card text-center message-reveal" style="padding: 2rem;">
         <p id="message-display" class="message-text" style="color: #3f3f46;"></p>
       </div>
 
