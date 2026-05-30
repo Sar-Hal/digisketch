@@ -18,6 +18,18 @@ pixel sketches, add a short message, and share an anonymous link.
 - **Backend:** Node.js with Express
 - **Database:** Upstash Redis
 
+## Project Structure & Workflow
+
+Since this project uses no frontend frameworks (like React) or build tools (like Webpack), the workflow is incredibly simple:
+
+- `public/`: Contains the pure frontend. 
+  - `styles.css`: Where all the colors, gradients, and soft UI glassmorphic styles are defined.
+  - `create.html` & `create.js`: The sketching wizard logic.
+  - `view.html` & `view.js`: The note viewing logic.
+- `api/index.js`: The backend Express app. This runs as a **Serverless Function** on Vercel.
+- `server.js`: Only used for local development. It wraps `api/index.js` and serves the `public/` static files so you can test locally using `npm run dev`.
+- `vercel.json`: Tells Vercel how to route traffic correctly in production.
+
 ## Local Setup
 
 1. Install dependencies:

@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=VT323&display=swap');
 
 :root {
-  --color-paper: #fafafa;
+  --color-paper: #ffecbf;
   --color-ink: #18181b;
-  --color-accent: #f2a7b3;
+  --color-accent: #ecf2a7;
   --color-accent-2: #f2c46d;
   --color-accent-3: #8ccf9a;
   --color-gridline: rgba(24, 24, 27, 0.06);
@@ -21,9 +21,9 @@
 body {
   background-color: var(--color-paper);
   background-image: 
-    radial-gradient(at 0% 0%, hsla(350, 75%, 85%, 0.4) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(140, 45%, 80%, 0.3) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, hsla(40, 80%, 80%, 0.3) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, hsl(2, 98%, 84%) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsl(57, 100%, 77%) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsl(2, 98%, 84%) 0px, transparent 50%);
   background-attachment: fixed;
   color: var(--color-ink);
   font-family: var(--font-sans);
